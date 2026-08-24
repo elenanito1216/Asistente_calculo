@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Tutor Cálculo | Asistente Pedagógico Universitario</title>
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>∫</text></svg>">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+
+    <!-- =============== HEADER SUPERIOR =============== -->
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <button class="icon-btn sidebar-toggle" id="sidebarToggle" title="Mostrar/ocultar conversaciones">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="brand">
+          <span class="brand-icon">∫</span>
+          <h1 class="brand-name">AI TUTOR CÁLCULO</h1>
+        </div>
+      </div>
+      <div class="top-bar-right">
+        <span class="badge badge-diff">Diferencial</span>
+        <span class="badge badge-int">Integral</span>
+        <span class="badge badge-multi">Multivariado</span>
+        <div class="status-dot-wrap" id="statusIndicator" title="Estado del servidor">
+          <span class="status-dot online"></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- =============== CUERPO DE 3 PANELES =============== -->
+    <div class="panels-wrapper">
+
+      <!-- ====== PANEL IZQUIERDO: CONVERSACIONES + EXPLICACIÓN TEXTUAL ====== -->
+      <aside class="left-panel" id="leftPanel">
+        <!-- Sección superior: Historial guardado -->
+        <div class="panel-section conversations-section">
+          <div class="panel-section-header">
+            <h2>Conversaciones</h2>
+            <button class="icon-btn" id="newChatBtn" title="Nueva conversación">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+          </div>
+          <div class="conversations-list" id="conversationsList">
+            <!-- Se llenan dinámicamente desde localStorage -->
+          </div>
+        </div>
+
+        <!-- Sección inferior: Texto explicativo del tutor (expandible) -->
+        <div class="panel-section text-section" id="textSection">
+          <div class="panel-section-header">
+            <h2>Explicación</h2>
+            <button class="icon-btn" id="expandTextBtn" title="Ampliar explicación">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+            </button>
+          </div>
+          <div class="text-content-scroll" id="textContentArea">
+            <div class="text-placeholder" id="textPlaceholder">
+              <p>La explicación paso a paso aparecerá aquí cuando envíes una consulta.</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ====== PANEL CENTRAL: PIZARRA MATEMÁTICA ====== -->
+      <main class="center-panel" id="centerPanel">
+        <!-- Estado vacío / Bienvenida -->
+        <div class="pizarra-welcome" id="pizarraWelcome">
+          <div class="welcome-logo">∫</div>
+          <h2>Pizarra Matemática</h2>
+          <p>Las fórmulas y desarrollo matemático aparecerán aquí</p>
+          <div class="examples-grid">
+            <button class="example-btn" data-prompt="Calcula la derivada de f(x) = x^2 sin(3x) explicando cada regla aplicada.">
+              <span class="example-tag tag-diff">Derivadas</span>
+              <span class="example-text">$f(x) = x^2 \sin(3x)$</span>
+            </button>
+            <button class="example-btn" data-prompt="Resuelve la integral indefinida ∫ x e^{2x} dx detallando la elección de u y dv.">
+              <span class="example-tag tag-int">Integrales</span>
+              <span class="example-text">$\int x\, e^{2x}\, dx$</span>
+            </button>
+            <button class="example-btn" data-prompt="Halla el gradiente y la ecuación del plano tangente a z = x^2 + 3xy - y^2 en el punto (1, 2).">
+              <span class="example-tag tag-multi">Multivariado</span>
+              <span class="example-text">$\nabla f,\; z = x^2+3xy-y^2$</span>
+            </button>
+            <button class="example-btn" data-prompt="Calcula el límite lim_{x→0} sin(3x)/x justificando analíticamente el resultado.">
+              <span class="example-tag tag-diff">Límites</span>
+              <span class="example-text">$\lim_{x \to 0} \frac{\sin(3x)}{x}$</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Contenido matemático renderizado -->
+        <div class="pizarra-content hidden" id="pizarraContent">
+          <div class="pizarra-header" id="pizarraHeader">
+            <!-- Título dinámico del tema -->
+          </div>
+          <div class="pizarra-math" id="pizarraMath">
+            <!-- Fórmulas LaTeX renderizadas aquí -->
+          </div>
+        </div>
+      </main>
+
+      <!-- ====== PANEL DERECHO: CHAT CON IA ====== -->
+      <aside class="right-panel" id="rightPanel">
+        <div class="panel-section-header chat-header">
+          <h2>Chat con IA</h2>
+          <button class="icon-btn" id="clearChatBtn" title="Limpiar chat actual">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          </button>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+          <!-- Mensajes del chat renderizados aquí -->
+        </div>
+
+        <!-- Indicador de carga -->
+        <div class="loading-indicator hidden" id="loadingIndicator">
+          <div class="typing-dots"><span></span><span></span><span></span></div>
+          <span class="loading-label">Resolviendo...</span>
+        </div>
+
+        <!-- Input de chat -->
+        <div class="chat-input-area">
+          <form class="chat-form" id="chatForm">
+            <div class="input-row">
+              <textarea id="userInput" class="chat-textarea" placeholder="Pregunta sobre Cálculo..." rows="1" maxlength="3000"></textarea>
+              <button type="submit" class="send-btn" id="sendBtn" title="Enviar" aria-label="Enviar">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </button>
+            </div>
+            <div class="input-hints">
+              <span><kbd>Enter</kbd> enviar · <kbd>Shift+Enter</kbd> nueva línea</span>
+              <span class="char-counter" id="charCounter">0/3000</span>
+            </div>
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Overlay para panel de texto expandido -->
+  <div class="text-overlay hidden" id="textOverlay">
+    <div class="text-overlay-panel">
+      <div class="text-overlay-header">
+        <h2>Explicación Completa</h2>
+        <button class="icon-btn" id="closeOverlayBtn" title="Cerrar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="text-overlay-body" id="textOverlayBody">
+        <!-- Contenido expandido de la explicación -->
+      </div>
+    </div>
+  </div>
+
+  <!-- CDN Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@15.0.6/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.4/dist/purify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# Dependencias del Tutor Inteligente de Cálculo
+# Backend y Servidor Web
+fastapi==0.115.8
+uvicorn[standard]==0.34.0
+
+# SDK Oficial de Google Gemini (versión moderna y vigente)
+google-genai==1.3.0
+
+# Variables de entorno y configuración
+python-dotenv==1.0.1
+pydantic==2.10.6
+
+# Cliente HTTP para pruebas y llamadas auxiliares
+httpx==0.28.1
+
+# Pruebas automatizadas
+pytest==8.3.4

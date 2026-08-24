@@ -1,0 +1,26 @@
+# Entorno y variables secretas
+.env
+.env.local
+
+# Python / Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Entornos virtuales
+venv/
+.venv/
+env/
+ENV/
+
+# Pruebas y cobertura
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs e IDEs
+*.log
+.vscode/
+.idea/
