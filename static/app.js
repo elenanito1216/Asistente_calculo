@@ -96,6 +96,11 @@ function generarId() {
   return Date.now().toString(36) + Math.random().toString(36).substr(2, 6);
 }
 
+/** Escapa texto plano para insertarlo en HTML (contenido o atributos) */
+function escaparHTML(texto) {
+  return String(texto).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]));
+}
+
 /** Crea una nueva conversación vacía y la activa */
 function crearNuevaConversacion() {
   const conv = {
@@ -173,7 +178,8 @@ function renderizarMarkdownConMath(texto) {
   // Paso 3: Re-inyectar fórmulas
   mathBlocks.forEach((b, i) => {
     const tag = b.tipo === 'display' ? `$$${b.contenido}$$` : `$${b.contenido}$`;
-    html = html.replace(b.tipo === 'display' ? `%%MATH_D_${i}%%` : `%%MATH_I_${i}%%`, tag);
+    // Función como reemplazo: con un string, replace() interpretaría "$$" como "$"
+    html = html.replace(b.tipo === 'display' ? `%%MATH_D_${i}%%` : `%%MATH_I_${i}%%`, () => tag);
   });
 
   // Paso 4: Sanitizar
@@ -250,7 +256,7 @@ function mostrarEnPizarra(mathBlocks, titulo) {
   pizarraContent.classList.remove('hidden');
 
   // Header
-  pizarraHeader.innerHTML = `<h2>${DOMPurify.sanitize(titulo)}</h2>`;
+  pizarraHeader.innerHTML = `<h2>${escaparHTML(titulo)}</h2>`;
 
   // Limpiar y pintar bloques
   pizarraMath.innerHTML = '';
@@ -315,9 +321,9 @@ function agregarMensajeChat(rol, contenido, opts = {}) {
 
   let bodyHTML = '';
   if (rol === 'usuario') {
-    bodyHTML = `<div class="chat-msg-body">${DOMPurify.sanitize(contenido).replace(/\n/g, '<br>')}</div>`;
+    bodyHTML = `<div class="chat-msg-body">${escaparHTML(contenido).replace(/\n/g, '<br>')}</div>`;
   } else if (rol === 'error') {
-    bodyHTML = `<div class="chat-msg-body">⚠️ ${DOMPurify.sanitize(contenido)}</div>`;
+    bodyHTML = `<div class="chat-msg-body">⚠️ ${escaparHTML(contenido)}</div>`;
   } else {
     // Tutor: renderizar con Markdown + KaTeX, hacerlo clickable
     const htmlRenderizado = renderizarMarkdownConMath(contenido);
@@ -393,7 +399,7 @@ function renderizarListaConversaciones() {
     item.className = `conv-item ${conv.id === appState.conversacionActiva ? 'active' : ''}`;
     item.innerHTML = `
       <span class="conv-icon">💬</span>
-      <span class="conv-title" title="${DOMPurify.sanitize(conv.titulo)}">${DOMPurify.sanitize(conv.titulo)}</span>
+      <span class="conv-title" title="${escaparHTML(conv.titulo)}">${escaparHTML(conv.titulo)}</span>
       <button class="conv-delete" title="Eliminar conversación" data-id="${conv.id}">✕</button>
     `;
 
@@ -490,7 +496,10 @@ async function enviarMensaje(textoMensaje) {
     const data = await res.json();
 
     if (!res.ok) {
-      const errMsg = data.detail || 'Error al comunicarse con el tutor.';
+      // Los errores 422 de FastAPI traen detail como lista de objetos {msg, ...}
+      const errMsg = Array.isArray(data.detail)
+        ? data.detail.map(d => d.msg).join(' ')
+        : (data.detail || 'Error al comunicarse con el tutor.');
       agregarMensajeChat('error', errMsg);
       conv.mensajes.pop(); // Quitar el mensaje fallido
       guardarEstado();

@@ -8,7 +8,14 @@ Verifica:
 4. Configuración del System Prompt y presencia de las 5 secciones pedagógicas
 """
 
+import asyncio
+from types import SimpleNamespace
+
+import httpx
 import pytest
+from google.genai import errors as genai_errors
+
+import app as app_module
 from fastapi.testclient import TestClient
 from app import app
 from prompts import SYSTEM_PROMPT
@@ -89,3 +96,43 @@ def test_system_prompt_pedagogical_structure():
     assert "$...$" in SYSTEM_PROMPT or "$" in SYSTEM_PROMPT
     assert "$$" in SYSTEM_PROMPT
     assert "aligned" in SYSTEM_PROMPT
+
+
+@pytest.mark.parametrize("resultado, codigo_esperado", [
+    ("La derivada de $x^2$ es $2x$.", 200),
+    (genai_errors.APIError(429, httpx.Response(429, json={"error": {"message": "RESOURCE_EXHAUSTED"}})), 429),
+    (genai_errors.APIError(400, httpx.Response(400, json={"error": {"message": "INVALID_ARGUMENT"}})), 500),
+    (asyncio.TimeoutError(), 504),
+])
+def test_chat_con_gemini_simulado(monkeypatch, resultado, codigo_esperado):
+    """/api/chat usa el cliente async de Gemini y mapea sus errores al código HTTP correcto."""
+    async def generate_content(**kwargs):
+        if isinstance(resultado, Exception):
+            raise resultado
+        return SimpleNamespace(text=resultado)
+
+    cliente_falso = SimpleNamespace(aio=SimpleNamespace(models=SimpleNamespace(generate_content=generate_content)))
+    monkeypatch.setattr(app_module, "GEMINI_API_KEY", "clave_falsa")
+    monkeypatch.setattr(app_module, "gemini_client", cliente_falso)
+
+    response = client.post("/api/chat", json={"mensajes": [{"rol": "usuario", "contenido": "Deriva x^2"}]})
+    assert response.status_code == codigo_esperado
+    if codigo_esperado == 200:
+        assert response.json()["respuesta"] == resultado
+
+
+def test_chat_seguimiento_con_respuesta_larga_del_tutor(monkeypatch):
+    """Una pregunta de seguimiento no debe fallar si la respuesta previa del tutor supera 3000 caracteres."""
+    async def generate_content(**kwargs):
+        return SimpleNamespace(text="Detallemos el paso 2...")
+
+    cliente_falso = SimpleNamespace(aio=SimpleNamespace(models=SimpleNamespace(generate_content=generate_content)))
+    monkeypatch.setattr(app_module, "GEMINI_API_KEY", "clave_falsa")
+    monkeypatch.setattr(app_module, "gemini_client", cliente_falso)
+
+    response = client.post("/api/chat", json={"mensajes": [
+        {"rol": "usuario", "contenido": "Integra x e^x"},
+        {"rol": "tutor", "contenido": "x" * 5000},
+        {"rol": "usuario", "contenido": "Explícame con más detalle el paso 2"},
+    ]})
+    assert response.status_code == 200

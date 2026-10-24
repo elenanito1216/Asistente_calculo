@@ -8,16 +8,19 @@ manejo de errores pedagógicos y entrega de archivos estáticos.
 
 import os
 import sys
+import asyncio
 import logging
 from typing import List, Literal
 from contextlib import asynccontextmanager
 
+import httpx
 from dotenv import load_dotenv
+from google.genai import errors as genai_errors
 from fastapi import FastAPI, HTTPException, status
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 # Cargar variables de entorno desde .env
 load_dotenv()
@@ -126,8 +129,8 @@ class Mensaje(BaseModel):
     contenido: str = Field(
         ..., 
         min_length=1, 
-        max_length=3000, 
-        description="Texto del mensaje (no vacío, máx 3000 caracteres)"
+        max_length=20000,
+        description="Texto del mensaje (no vacío; máx 3000 caracteres si es del estudiante)"
     )
 
     @field_validator("contenido")
@@ -137,6 +140,14 @@ class Mensaje(BaseModel):
         if not limpio:
             raise ValueError("El mensaje no puede contener únicamente espacios en blanco.")
         return limpio
+
+    # Solo el estudiante tiene límite de 3000: las respuestas del tutor (5 fases) suelen ser
+    # más largas y viajan en el historial de cada pregunta de seguimiento.
+    @model_validator(mode="after")
+    def validar_largo_usuario(self) -> "Mensaje":
+        if self.rol == "usuario" and len(self.contenido) > 3000:
+            raise ValueError("El mensaje del estudiante no puede superar los 3000 caracteres.")
+        return self
 
 
 class ChatRequest(BaseModel):
@@ -229,10 +240,14 @@ async def chat_calculo(request: ChatRequest):
         # 5. Ejecutar la llamada a Gemini
         logger.info(f"Enviando consulta a Gemini ({GEMINI_MODEL}) con {len(contents)} mensajes en el historial...")
         
-        response = gemini_client.models.generate_content(
-            model=GEMINI_MODEL,
-            contents=contents,
-            config=config
+        # Cliente async (.aio) para no bloquear el event loop mientras Gemini responde
+        response = await asyncio.wait_for(
+            gemini_client.aio.models.generate_content(
+                model=GEMINI_MODEL,
+                contents=contents,
+                config=config
+            ),
+            timeout=TIMEOUT_SEGUNDOS
         )
 
         # 6. Validar respuesta obtenida
@@ -249,21 +264,24 @@ async def chat_calculo(request: ChatRequest):
         raise
 
     except Exception as exc:
-        mensaje_tecnico = str(exc)
-        logger.error(f"Error durante la llamada a Gemini API: {mensaje_tecnico}", exc_info=True)
+        logger.error(f"Error durante la llamada a Gemini API: {exc}", exc_info=True)
 
-        # Clasificación pedagógica de errores para el estudiante
-        if "RESOURCE_EXHAUSTED" in mensaje_tecnico or "429" in mensaje_tecnico:
+        # Clasificación pedagógica de errores usando el código HTTP real de la API
+        codigo = exc.code if isinstance(exc, genai_errors.APIError) else None
+        # Google responde 400 con API_KEY_INVALID cuando la clave es incorrecta
+        clave_invalida = codigo in (401, 403) or (codigo == 400 and "API_KEY_INVALID" in str(exc))
+
+        if codigo == 429:
             raise HTTPException(
                 status_code=status.HTTP_429_TOO_MANY_REQUESTS,
                 detail="Se ha excedido la cuota de peticiones a la API de Gemini. Por favor espera un minuto antes de enviar tu siguiente consulta."
             )
-        elif "INVALID_ARGUMENT" in mensaje_tecnico or "API_KEY_INVALID" in mensaje_tecnico or "401" in mensaje_tecnico:
+        elif clave_invalida:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="La clave de API de Gemini provista es inválida o no tiene permisos. Verifica tu archivo .env."
             )
-        elif "Deadline" in mensaje_tecnico or "timeout" in mensaje_tecnico.lower():
+        elif codigo == 504 or isinstance(exc, (asyncio.TimeoutError, httpx.TimeoutException)):
             raise HTTPException(
                 status_code=status.HTTP_504_GATEWAY_TIMEOUT,
                 detail="El cálculo tomó más tiempo de lo esperado (tiempo de espera agotado). Intenta reformular tu consulta de forma más puntual."
