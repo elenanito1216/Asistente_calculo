@@ -10,7 +10,7 @@ import os
 import sys
 import asyncio
 import logging
-from typing import List, Literal
+from typing import List, Literal, Optional
 from contextlib import asynccontextmanager
 
 import httpx
@@ -39,17 +39,66 @@ except ImportError:
     logger.error("No se encontró el archivo prompts.py. Asegúrate de que existe en la raíz del proyecto.")
     SYSTEM_PROMPT = "Eres un tutor experto de cálculo universitario."
 
+from verificador import extraer_bloque, verificar
+from graficador import generar_grafica
+
 # ============================================================================
 # CONFIGURACIÓN Y CLIENTE GEMINI (google-genai)
 # ============================================================================
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
-GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash").strip()
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.5-flash").strip()
 PORT = int(os.getenv("PORT", "8000"))
 
 # Límite máximo de mensajes pasados en el historial para controlar consumo de tokens
 MAX_HISTORIAL_MENSAJES = 10  # Equivale a 5 intercambios completos estudiante/tutor
 TIMEOUT_SEGUNDOS = 45.0      # Límite de tiempo para la generación de la respuesta
+TIMEOUT_VERIFICACION = 8.0   # Límite para la comprobación simbólica con SymPy
+# Modelos que se prueban en orden si GEMINI_MODEL está saturado (configurable en .env)
+MODELOS_RESPALDO_DEFAULT = "gemini-flash-lite-latest,gemini-3.8-flash"
+
+
+async def verificar_respuesta(texto: str) -> tuple[str, Optional[dict]]:
+    """Quita el bloque ```verificacion``` de la respuesta y comprueba el resultado con SymPy."""
+    texto, datos = extraer_bloque(texto)
+    if datos is None:
+        return texto, None
+    try:
+        # ponytail: el hilo no se puede cancelar; si SymPy se cuelga sigue consumiendo CPU
+        # en segundo plano. Usar un proceso aparte si se publica para muchos usuarios.
+        return texto, await asyncio.wait_for(asyncio.to_thread(verificar, datos), TIMEOUT_VERIFICACION)
+    except Exception as exc:
+        logger.warning(f"No se pudo verificar con SymPy ({datos}): {exc!r}")
+        return texto, {"estado": "no_verificable", "sympy": None}
+
+
+def narracion_respuesta(texto: str) -> tuple[str, Optional[dict]]:
+    """Quita el bloque ```narracion``` (guion para la voz) y valida su forma."""
+    texto, datos = extraer_bloque(texto, "narracion")
+    if not isinstance(datos, dict) or not isinstance(datos.get("pasos"), list):
+        return texto, None
+    pasos = []
+    for paso in datos["pasos"][:8]:
+        if not isinstance(paso, dict) or not isinstance(paso.get("texto"), str) or not paso["texto"].strip():
+            continue
+        foco = paso.get("foco")
+        # "grafica" o el comienzo del LaTeX de una fórmula $$...$$ (el frontend busca cuál coincide)
+        foco = foco.strip()[:200] or None if isinstance(foco, str) else None
+        pasos.append({"texto": paso["texto"].strip()[:400], "foco": foco})
+    return texto, ({"pasos": pasos} if pasos else None)
+
+
+async def graficar_respuesta(texto: str) -> tuple[str, Optional[dict]]:
+    """Quita el bloque ```grafica``` de la respuesta y calcula sus puntos con SymPy."""
+    texto, datos = extraer_bloque(texto, "grafica")
+    if datos is None:
+        return texto, None
+    try:
+        return texto, await asyncio.wait_for(asyncio.to_thread(generar_grafica, datos), TIMEOUT_VERIFICACION)
+    except Exception as exc:
+        # Sin gráfica la respuesta sigue siendo útil; no se muestra error al estudiante
+        logger.warning(f"No se pudo generar la gráfica ({datos}): {exc!r}")
+        return texto, None
 
 # Cliente global de Gemini
 gemini_client = None
@@ -63,7 +112,7 @@ def inicializar_cliente_gemini() -> bool:
     
     load_dotenv(override=True)
     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
-    GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash").strip()
+    GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.5-flash").strip()
 
     if not GEMINI_API_KEY or GEMINI_API_KEY == "test_key_for_verification":
         logger.error(
@@ -169,6 +218,18 @@ class ChatRequest(BaseModel):
 
 class ChatResponse(BaseModel):
     respuesta: str = Field(..., description="Explicación pedagógica en formato Markdown + LaTeX")
+    verificacion: Optional[dict] = Field(
+        None,
+        description="Resultado de la comprobación con SymPy: {estado, sympy}. None si la respuesta no trae resultado verificable."
+    )
+    grafica: Optional[dict] = Field(
+        None,
+        description="Puntos calculados con SymPy para dibujar con Plotly (ver graficador.py). None si no hay gráfica."
+    )
+    narracion: Optional[dict] = Field(
+        None,
+        description="Guion para la voz: {pasos: [{texto, foco}]}, foco = 'grafica' | comienzo del LaTeX de una fórmula | None."
+    )
 
 
 class HealthResponse(BaseModel):
@@ -237,18 +298,31 @@ async def chat_calculo(request: ChatRequest):
             temperature=0.2, # Baja temperatura para alta precisión y rigor algebraico
         )
 
-        # 5. Ejecutar la llamada a Gemini
-        logger.info(f"Enviando consulta a Gemini ({GEMINI_MODEL}) con {len(contents)} mensajes en el historial...")
-        
-        # Cliente async (.aio) para no bloquear el event loop mientras Gemini responde
-        response = await asyncio.wait_for(
-            gemini_client.aio.models.generate_content(
-                model=GEMINI_MODEL,
-                contents=contents,
-                config=config
-            ),
-            timeout=TIMEOUT_SEGUNDOS
-        )
+        # 5. Ejecutar la llamada a Gemini, pasando a un modelo de respaldo si el principal
+        #    está saturado (503), sin cuota (429), no existe (404) o no responde a tiempo.
+        respaldo = [m.strip() for m in os.getenv("GEMINI_MODELOS_RESPALDO", MODELOS_RESPALDO_DEFAULT).split(",")]
+        modelos = [GEMINI_MODEL] + [m for m in respaldo if m and m != GEMINI_MODEL]
+
+        for i, modelo in enumerate(modelos):
+            logger.info(f"Enviando consulta a Gemini ({modelo}) con {len(contents)} mensajes en el historial...")
+            try:
+                # Cliente async (.aio) para no bloquear el event loop mientras Gemini responde
+                response = await asyncio.wait_for(
+                    gemini_client.aio.models.generate_content(
+                        model=modelo,
+                        contents=contents,
+                        config=config
+                    ),
+                    timeout=TIMEOUT_SEGUNDOS
+                )
+                break
+            except Exception as exc:
+                no_disponible = isinstance(exc, asyncio.TimeoutError) or (
+                    isinstance(exc, genai_errors.APIError) and exc.code in (404, 429, 503)
+                )
+                if not no_disponible or i == len(modelos) - 1:
+                    raise
+                logger.warning(f"Modelo {modelo} no disponible ({exc!r}); probando con {modelos[i + 1]}")
 
         # 6. Validar respuesta obtenida
         if not response.text:
@@ -258,7 +332,10 @@ async def chat_calculo(request: ChatRequest):
                 detail="La respuesta no pudo ser generada por los filtros de seguridad de la IA. Por favor formula tu duda con términos estrictamente matemáticos."
             )
 
-        return ChatResponse(respuesta=response.text)
+        texto, verificacion = await verificar_respuesta(response.text)
+        texto, grafica = await graficar_respuesta(texto)
+        texto, narracion = narracion_respuesta(texto)
+        return ChatResponse(respuesta=texto, verificacion=verificacion, grafica=grafica, narracion=narracion)
 
     except HTTPException:
         raise
@@ -280,6 +357,11 @@ async def chat_calculo(request: ChatRequest):
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="La clave de API de Gemini provista es inválida o no tiene permisos. Verifica tu archivo .env."
+            )
+        elif codigo == 503:
+            raise HTTPException(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail="El modelo de IA está saturado en este momento (alta demanda en Google). Espera unos segundos y vuelve a enviar tu pregunta."
             )
         elif codigo == 504 or isinstance(exc, (asyncio.TimeoutError, httpx.TimeoutException)):
             raise HTTPException(

@@ -13,9 +13,10 @@
 5. [Ejecución](#-ejecución)
 6. [Diseño Pedagógico y System Prompt](#-diseño-pedagógico-y-system-prompt)
 7. [Pipeline de Renderizado Matemático (LaTeX / KaTeX)](#-pipeline-de-renderizado-matemático-latex--katex)
-8. [Gestión de Historial y Consumo de Tokens](#-gestión-de-historial-y-consumo-de-tokens)
-9. [Guía de Solución de Problemas (Troubleshooting)](#-guía-de-solución-de-problemas-troubleshooting)
-10. [Trabajo Futuro](#-trabajo-futuro)
+8. [Verificación Simbólica con SymPy y Experimento](#-verificación-simbólica-con-sympy-y-experimento)
+9. [Gestión de Historial y Consumo de Tokens](#-gestión-de-historial-y-consumo-de-tokens)
+10. [Guía de Solución de Problemas (Troubleshooting)](#-guía-de-solución-de-problemas-troubleshooting)
+11. [Trabajo Futuro](#-trabajo-futuro)
 
 ---
 
@@ -39,13 +40,22 @@ El proyecto sigue una arquitectura monolítica ligera: un único servidor en Fas
 proyecto/
 ├── app.py                 # Servidor FastAPI + endpoints + control de errores
 ├── prompts.py             # System prompt pedagógico y reglas de KaTeX
+├── verificador.py         # Comprobación simbólica de los resultados con SymPy
+├── graficador.py          # Puntos de las gráficas (curvas, áreas, tangentes, superficies) con SymPy
 ├── requirements.txt       # Dependencias fijadas con versiones exactas
 ├── .env.example           # Plantilla de variables de entorno
 ├── .gitignore             # Exclusión de credenciales y temporales
 ├── README.md              # Documentación completa del proyecto
 ├── tests/
 │   ├── test_app.py        # Pruebas de integración con pytest y TestClient
+│   ├── test_verificador.py # Verificación con SymPy y bloqueo de código malicioso
+│   ├── test_graficador.py # Gráficas: tangentes exactas, asíntotas y datos inválidos
+│   ├── test_experimento.py # Valida las 79 claves de respuesta del banco
 │   └── test_latex_pipeline.py # Pruebas del pipeline de placeholders LaTeX
+├── experimento/
+│   ├── ejercicios.json    # Banco de 79 ejercicios con clave de respuesta
+│   ├── evaluar.py         # Corre el experimento y genera resultados.md
+│   └── grafica.py         # Gráficas para el póster (resultados*.png)
 └── static/
     ├── index.html         # Interfaz de usuario con CDNs
     ├── styles.css         # Tema oscuro moderno con CSS variables (WCAG AA)
@@ -99,7 +109,7 @@ pip install -r requirements.txt
 4. Abre `.env` y pega tu clave:
    ```env
    GEMINI_API_KEY=AIzaSy...TuClaveAqui
-   GEMINI_MODEL=gemini-2.5-flash
+   GEMINI_MODEL=gemini-3.8-flash
    PORT=8000
    ```
 
@@ -171,6 +181,60 @@ graph TD
 
 ---
 
+## ✅ Verificación Simbólica con SymPy y Experimento
+
+**Problema:** los modelos de lenguaje a veces cometen errores algebraicos con total seguridad.
+**Solución: la IA propone, SymPy comprueba.** Al final de cada ejercicio, Gemini adjunta un bloque oculto con su resultado en sintaxis SymPy. El backend ([verificador.py](verificador.py)) lo comprueba de forma independiente:
+
+| Tipo | Cómo se comprueba |
+| :--- | :--- |
+| Derivada (y parcial) | SymPy deriva la función y compara con la respuesta |
+| Integral indefinida | Se deriva la respuesta y debe recuperarse el integrando |
+| Integral definida | Integración numérica (y exacta si la numérica no coincide) |
+| Límite | SymPy calcula el límite y compara |
+
+El estudiante ve un sello: **✅ verificado**, **⚠️ SymPy obtuvo otro resultado** (con el valor correcto) o **❔ no se pudo decidir**.
+Como `parse_expr` usa `eval`, solo se aceptan caracteres, funciones y variables de una lista permitida, sin acceso a `__builtins__`.
+
+### Experimento ([experimento/resultados.md](experimento/resultados.md))
+
+**Parte 1: Gemini resolviendo ejercicios reales** (`gemini-2.5-flash`, 21 ejercicios: 20 derivadas y 1 integral). Gemini acertó 21/21 y SymPy verificó las 21. La muestra es pequeña porque la cuota gratuita de la API permite 20 peticiones por día.
+
+**Parte 2: errores sembrados (prueba del detector, sin API).** A las 79 claves de respuesta correctas se les aplicaron errores deliberados (signo cambiado, factor 2, término de más):
+
+| Métrica | Resultado |
+| :--- | :---: |
+| Errores detectados con ⚠️ | **99.1%** (231/233) |
+| Errores aprobados con ✅ por equivocación | **0** (0/233) |
+| Falsas alarmas en respuestas correctas | **0%** (0/79) |
+| Sin decidir ❔ | 0.6% (2/312, ambos en $\sin(x)^{\cos(x)}$) |
+
+![Resultados del detector](experimento/resultados_sembrados.png)
+
+**Limitaciones (para defender ante el jurado):**
+- Los errores sembrados son algebraicos y simples; los errores reales de un modelo pueden ser más sutiles (aunque SymPy compara el valor matemático, no la forma, así que cualquier resultado distinto se detecta).
+- Si la IA transcribe mal el enunciado en el bloque, SymPy verifica el problema equivocado. El experimento mide esto aparte: compara contra el enunciado original del banco.
+- No cubre gradientes, planos tangentes ni multiplicadores de Lagrange.
+
+Reproducir:
+```bash
+python -X utf8 experimento/evaluar.py --sembrados   # parte 2 (sin API, ~25 s)
+python -X utf8 experimento/evaluar.py               # parte 1 (usa la API; retoma donde quedó)
+python -X utf8 experimento/grafica.py --sembrados
+```
+
+---
+
+## 📈 Gráficas Interactivas en la Pizarra
+
+Cuando una gráfica ayuda a entender, Gemini agrega un bloque oculto ```grafica``` que describe qué dibujar. El backend ([graficador.py](graficador.py)) calcula los puntos con SymPy, usando el mismo parser seguro del verificador, y la pizarra los dibuja con Plotly:
+
+- **2D:** hasta 4 funciones, área sombreada bajo la curva (integrales definidas) y recta tangente con su punto. La pendiente es la derivada exacta de SymPy, no un valor que propone la IA.
+- **3D:** superficies $z = f(x, y)$ con plano tangente $z = f(a,b) + f_x(a,b)(x-a) + f_y(a,b)(y-b)$, rotables con el mouse.
+- Las asíntotas (por ejemplo $	an x$ o $1/x$) se cortan para no dibujar líneas verticales falsas, y el eje y se limita si unos pocos valores enormes aplastan la gráfica.
+
+---
+
 ## 🔄 Gestión de Historial y Consumo de Tokens
 
 Para permitir un diálogo multi-turno continuo mientras se protege la cuota de la API:
@@ -197,6 +261,7 @@ Para permitir un diálogo multi-turno continuo mientras se protege la cuota de l
 Características planificadas para versiones posteriores:
 - [ ] **Streaming SSE (Server-Sent Events):** Para renderizar las explicaciones token a token a medida que se generan.
 - [ ] **Entrada Multimodal por Imagen:** Permitir a los estudiantes subir una fotografía del problema del cuaderno o libro de texto.
-- [ ] **Generación de Gráficas de Funciones:** Integración con librerías interactivas como Function Plot o Desmos API para visualizar curvas, planos tangentes y campos vectoriales.
+- [x] **Gráficas interactivas en la pizarra:** curvas, áreas bajo la curva, rectas tangentes, superficies 3D y planos tangentes (SymPy calcula los puntos y las derivadas exactas; Plotly los dibuja).
+- [ ] **Campos vectoriales y gradientes** en las gráficas 3D.
 - [ ] **Persistencia en Base de Datos:** Guardar sesiones y dudas favoritas usando SQLite o PostgreSQL.
 - [ ] **Exportación a PDF / LaTeX:** Permitir descargar la sesión completa en un documento formateado para estudio.

@@ -1,0 +1,3434 @@
+[
+  {
+    "id": "D01",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = x^{3} \\log{\\left(x \\right)}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "3*x^2*log(x) + x^2"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "D01",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = x^{3} \\log{\\left(x \\right)}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(3*x^2*log(x) + x^2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D01",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = x^{3} \\log{\\left(x \\right)}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(3*x^2*log(x) + x^2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D01",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = x^{3} \\log{\\left(x \\right)}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(3*x^2*log(x) + x^2) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D02",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = e^{x} \\sin{\\left(x \\right)}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "exp(x)*(sin(x) + cos(x))"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "D02",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = e^{x} \\sin{\\left(x \\right)}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(exp(x)*(sin(x) + cos(x)))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D02",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = e^{x} \\sin{\\left(x \\right)}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(exp(x)*(sin(x) + cos(x)))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D02",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = e^{x} \\sin{\\left(x \\right)}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(exp(x)*(sin(x) + cos(x))) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D03",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\frac{x^{2} + 1}{x - 1}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "(x^2 - 2*x - 1)/(x-1)^2"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "D03",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\frac{x^{2} + 1}{x - 1}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-((x^2 - 2*x - 1)/(x-1)^2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D03",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\frac{x^{2} + 1}{x - 1}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*((x^2 - 2*x - 1)/(x-1)^2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D03",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\frac{x^{2} + 1}{x - 1}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "((x^2 - 2*x - 1)/(x-1)^2) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D04",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\sqrt{x^{2} + 1}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "x/sqrt(1+x^2)"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "D04",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\sqrt{x^{2} + 1}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(x/sqrt(1+x^2))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D04",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\sqrt{x^{2} + 1}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(x/sqrt(1+x^2))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D04",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\sqrt{x^{2} + 1}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(x/sqrt(1+x^2)) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D05",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\sin^{3}{\\left(x \\right)}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "3*sin(x)^2*cos(x)"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "D05",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\sin^{3}{\\left(x \\right)}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(3*sin(x)^2*cos(x))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D05",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\sin^{3}{\\left(x \\right)}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(3*sin(x)^2*cos(x))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D05",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\sin^{3}{\\left(x \\right)}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(3*sin(x)^2*cos(x)) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D06",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\operatorname{atan}{\\left(x^{2} \\right)}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "2*x/(1+x^4)"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "D06",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\operatorname{atan}{\\left(x^{2} \\right)}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(2*x/(1+x^4))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D06",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\operatorname{atan}{\\left(x^{2} \\right)}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(2*x/(1+x^4))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D06",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\operatorname{atan}{\\left(x^{2} \\right)}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(2*x/(1+x^4)) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D07",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = x^{x}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "x^x*(log(x) + 1)"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "D07",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = x^{x}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(x^x*(log(x) + 1))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D07",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = x^{x}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(x^x*(log(x) + 1))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D07",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = x^{x}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(x^x*(log(x) + 1)) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D08",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\log{\\left(\\cos{\\left(x \\right)} \\right)}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "-tan(x)"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "D08",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\log{\\left(\\cos{\\left(x \\right)} \\right)}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(-tan(x))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D08",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\log{\\left(\\cos{\\left(x \\right)} \\right)}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(-tan(x))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D08",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\log{\\left(\\cos{\\left(x \\right)} \\right)}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(-tan(x)) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D09",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de orden 2 de $f(x) = e^{- x^{2}}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "(4*x^2 - 2)*exp(-x^2)"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "D09",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de orden 2 de $f(x) = e^{- x^{2}}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-((4*x^2 - 2)*exp(-x^2))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D09",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de orden 2 de $f(x) = e^{- x^{2}}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*((4*x^2 - 2)*exp(-x^2))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D09",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de orden 2 de $f(x) = e^{- x^{2}}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "((4*x^2 - 2)*exp(-x^2)) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D10",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = x \\operatorname{asin}{\\left(x \\right)}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "asin(x) + x/sqrt(1-x^2)"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "D10",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = x \\operatorname{asin}{\\left(x \\right)}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(asin(x) + x/sqrt(1-x^2))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D10",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = x \\operatorname{asin}{\\left(x \\right)}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(asin(x) + x/sqrt(1-x^2))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D10",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = x \\operatorname{asin}{\\left(x \\right)}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(asin(x) + x/sqrt(1-x^2)) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D11",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\tan^{2}{\\left(x \\right)}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "2*tan(x)*sec(x)^2"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "D11",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\tan^{2}{\\left(x \\right)}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(2*tan(x)*sec(x)^2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D11",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\tan^{2}{\\left(x \\right)}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(2*tan(x)*sec(x)^2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D11",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\tan^{2}{\\left(x \\right)}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(2*tan(x)*sec(x)^2) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D12",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\sinh{\\left(x \\right)} \\cosh{\\left(x \\right)}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "cosh(2*x)"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "D12",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\sinh{\\left(x \\right)} \\cosh{\\left(x \\right)}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(cosh(2*x))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D12",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\sinh{\\left(x \\right)} \\cosh{\\left(x \\right)}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(cosh(2*x))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D12",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\sinh{\\left(x \\right)} \\cosh{\\left(x \\right)}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(cosh(2*x)) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D13",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada parcial $\\frac{\\partial f}{\\partial y}$ de $f = x^{2} y + e^{x y}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "x^2 + x*exp(x*y)"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "D13",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada parcial $\\frac{\\partial f}{\\partial y}$ de $f = x^{2} y + e^{x y}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(x^2 + x*exp(x*y))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D13",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada parcial $\\frac{\\partial f}{\\partial y}$ de $f = x^{2} y + e^{x y}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(x^2 + x*exp(x*y))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D13",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada parcial $\\frac{\\partial f}{\\partial y}$ de $f = x^{2} y + e^{x y}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(x^2 + x*exp(x*y)) + y"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D14",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada parcial $\\frac{\\partial f}{\\partial x}$ de $f = \\frac{\\sin{\\left(x y \\right)}}{x}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "(x*y*cos(x*y) - sin(x*y))/x^2"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "D14",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada parcial $\\frac{\\partial f}{\\partial x}$ de $f = \\frac{\\sin{\\left(x y \\right)}}{x}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-((x*y*cos(x*y) - sin(x*y))/x^2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D14",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada parcial $\\frac{\\partial f}{\\partial x}$ de $f = \\frac{\\sin{\\left(x y \\right)}}{x}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*((x*y*cos(x*y) - sin(x*y))/x^2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D14",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada parcial $\\frac{\\partial f}{\\partial x}$ de $f = \\frac{\\sin{\\left(x y \\right)}}{x}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "((x*y*cos(x*y) - sin(x*y))/x^2) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D15",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada parcial $\\frac{\\partial f}{\\partial x}$ de $f = \\log{\\left(x^{2} + y^{2} \\right)}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "2*x/(x^2+y^2)"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "D15",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada parcial $\\frac{\\partial f}{\\partial x}$ de $f = \\log{\\left(x^{2} + y^{2} \\right)}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(2*x/(x^2+y^2))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D15",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada parcial $\\frac{\\partial f}{\\partial x}$ de $f = \\log{\\left(x^{2} + y^{2} \\right)}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(2*x/(x^2+y^2))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D15",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada parcial $\\frac{\\partial f}{\\partial x}$ de $f = \\log{\\left(x^{2} + y^{2} \\right)}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(2*x/(x^2+y^2)) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D16",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de orden 3 de $f(x) = x^{4}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "24*x"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "D16",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de orden 3 de $f(x) = x^{4}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(24*x)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D16",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de orden 3 de $f(x) = x^{4}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(24*x)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D16",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de orden 3 de $f(x) = x^{4}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(24*x) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D17",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\sin^{\\cos{\\left(x \\right)}}{\\left(x \\right)}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "sin(x)^cos(x)*(cos(x)^2/sin(x) - sin(x)*log(sin(x)))"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "D17",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\sin^{\\cos{\\left(x \\right)}}{\\left(x \\right)}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(sin(x)^cos(x)*(cos(x)^2/sin(x) - sin(x)*log(sin(x))))"
+    },
+    "correcta": false,
+    "sello": "no_verificable"
+  },
+  {
+    "id": "D17",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\sin^{\\cos{\\left(x \\right)}}{\\left(x \\right)}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(sin(x)^cos(x)*(cos(x)^2/sin(x) - sin(x)*log(sin(x))))"
+    },
+    "correcta": false,
+    "sello": "no_verificable"
+  },
+  {
+    "id": "D17",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\sin^{\\cos{\\left(x \\right)}}{\\left(x \\right)}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(sin(x)^cos(x)*(cos(x)^2/sin(x) - sin(x)*log(sin(x)))) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D18",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\log{\\left(\\log{\\left(x \\right)} \\right)}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "1/(x*log(x))"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "D18",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\log{\\left(\\log{\\left(x \\right)} \\right)}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(1/(x*log(x)))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D18",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\log{\\left(\\log{\\left(x \\right)} \\right)}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(1/(x*log(x)))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D18",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de $f(x) = \\log{\\left(\\log{\\left(x \\right)} \\right)}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(1/(x*log(x))) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D19",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de orden 3 de $f(x) = x^{2} e^{x}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "(x^2 + 6*x + 6)*exp(x)"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "D19",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de orden 3 de $f(x) = x^{2} e^{x}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-((x^2 + 6*x + 6)*exp(x))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D19",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de orden 3 de $f(x) = x^{2} e^{x}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*((x^2 + 6*x + 6)*exp(x))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D19",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada de orden 3 de $f(x) = x^{2} e^{x}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "((x^2 + 6*x + 6)*exp(x)) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D20",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada parcial $\\frac{\\partial f}{\\partial x}$ de $f = x y e^{- x^{2} - y^{2}}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "y*(1 - 2*x^2)*exp(-x^2-y^2)"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "D20",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada parcial $\\frac{\\partial f}{\\partial x}$ de $f = x y e^{- x^{2} - y^{2}}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(y*(1 - 2*x^2)*exp(-x^2-y^2))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D20",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada parcial $\\frac{\\partial f}{\\partial x}$ de $f = x y e^{- x^{2} - y^{2}}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(y*(1 - 2*x^2)*exp(-x^2-y^2))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "D20",
+    "tipo": "derivada",
+    "enunciado": "Calcula la derivada parcial $\\frac{\\partial f}{\\partial x}$ de $f = x y e^{- x^{2} - y^{2}}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(y*(1 - 2*x^2)*exp(-x^2-y^2)) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I01",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int x e^{x} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "x*exp(x) - exp(x)"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "I01",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int x e^{x} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(x*exp(x) - exp(x))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I01",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int x e^{x} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(x*exp(x) - exp(x))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I01",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int x e^{x} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(x*exp(x) - exp(x)) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I02",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int x^{2} \\sin{\\left(x \\right)} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "-x^2*cos(x) + 2*x*sin(x) + 2*cos(x)"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "I02",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int x^{2} \\sin{\\left(x \\right)} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(-x^2*cos(x) + 2*x*sin(x) + 2*cos(x))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I02",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int x^{2} \\sin{\\left(x \\right)} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(-x^2*cos(x) + 2*x*sin(x) + 2*cos(x))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I02",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int x^{2} \\sin{\\left(x \\right)} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(-x^2*cos(x) + 2*x*sin(x) + 2*cos(x)) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I03",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int e^{x} \\sin{\\left(x \\right)} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "exp(x)*(sin(x) - cos(x))/2"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "I03",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int e^{x} \\sin{\\left(x \\right)} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(exp(x)*(sin(x) - cos(x))/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I03",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int e^{x} \\sin{\\left(x \\right)} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(exp(x)*(sin(x) - cos(x))/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I03",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int e^{x} \\sin{\\left(x \\right)} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(exp(x)*(sin(x) - cos(x))/2) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I04",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\log{\\left(x \\right)} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "x*log(x) - x"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "I04",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\log{\\left(x \\right)} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(x*log(x) - x)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I04",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\log{\\left(x \\right)} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(x*log(x) - x)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I04",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\log{\\left(x \\right)} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(x*log(x) - x) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I05",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{x^{2} + 4 x + 13} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "atan((x+2)/3)/3"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "I05",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{x^{2} + 4 x + 13} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(atan((x+2)/3)/3)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I05",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{x^{2} + 4 x + 13} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(atan((x+2)/3)/3)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I05",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{x^{2} + 4 x + 13} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(atan((x+2)/3)/3) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I06",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{x^{2} - 1} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "log(abs(x-1))/2 - log(abs(x+1))/2"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "I06",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{x^{2} - 1} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(log(abs(x-1))/2 - log(abs(x+1))/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I06",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{x^{2} - 1} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(log(abs(x-1))/2 - log(abs(x+1))/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I06",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{x^{2} - 1} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(log(abs(x-1))/2 - log(abs(x+1))/2) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I07",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\sec^{3}{\\left(x \\right)} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "(sec(x)*tan(x) + log(abs(sec(x) + tan(x))))/2"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "I07",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\sec^{3}{\\left(x \\right)} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-((sec(x)*tan(x) + log(abs(sec(x) + tan(x))))/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I07",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\sec^{3}{\\left(x \\right)} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*((sec(x)*tan(x) + log(abs(sec(x) + tan(x))))/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I07",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\sec^{3}{\\left(x \\right)} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "((sec(x)*tan(x) + log(abs(sec(x) + tan(x))))/2) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I08",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{x \\log{\\left(x \\right)}} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "log(abs(log(x)))"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "I08",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{x \\log{\\left(x \\right)}} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(log(abs(log(x))))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I08",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{x \\log{\\left(x \\right)}} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(log(abs(log(x))))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I08",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{x \\log{\\left(x \\right)}} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(log(abs(log(x)))) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I09",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{x}{\\sqrt{1 - x^{2}}} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "-sqrt(1-x^2)"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "I09",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{x}{\\sqrt{1 - x^{2}}} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(-sqrt(1-x^2))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I09",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{x}{\\sqrt{1 - x^{2}}} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(-sqrt(1-x^2))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I09",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{x}{\\sqrt{1 - x^{2}}} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(-sqrt(1-x^2)) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I10",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\sqrt{1 - x^{2}} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "(x*sqrt(1-x^2) + asin(x))/2"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "I10",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\sqrt{1 - x^{2}} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-((x*sqrt(1-x^2) + asin(x))/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I10",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\sqrt{1 - x^{2}} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*((x*sqrt(1-x^2) + asin(x))/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I10",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\sqrt{1 - x^{2}} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "((x*sqrt(1-x^2) + asin(x))/2) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I11",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{x^{2} \\left(x + 1\\right)} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "-log(abs(x)) - 1/x + log(abs(x+1))"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "I11",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{x^{2} \\left(x + 1\\right)} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(-log(abs(x)) - 1/x + log(abs(x+1)))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I11",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{x^{2} \\left(x + 1\\right)} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(-log(abs(x)) - 1/x + log(abs(x+1)))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I11",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{x^{2} \\left(x + 1\\right)} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(-log(abs(x)) - 1/x + log(abs(x+1))) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I12",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\sin^{2}{\\left(x \\right)} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "x/2 - sin(2*x)/4"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "I12",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\sin^{2}{\\left(x \\right)} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(x/2 - sin(2*x)/4)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I12",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\sin^{2}{\\left(x \\right)} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(x/2 - sin(2*x)/4)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I12",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\sin^{2}{\\left(x \\right)} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(x/2 - sin(2*x)/4) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I13",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\sin^{3}{\\left(x \\right)} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "-cos(x) + cos(x)^3/3"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "I13",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\sin^{3}{\\left(x \\right)} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(-cos(x) + cos(x)^3/3)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I13",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\sin^{3}{\\left(x \\right)} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(-cos(x) + cos(x)^3/3)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I13",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\sin^{3}{\\left(x \\right)} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(-cos(x) + cos(x)^3/3) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I14",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int x \\cos{\\left(x^{2} \\right)} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "sin(x^2)/2"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "I14",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int x \\cos{\\left(x^{2} \\right)} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(sin(x^2)/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I14",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int x \\cos{\\left(x^{2} \\right)} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(sin(x^2)/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I14",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int x \\cos{\\left(x^{2} \\right)} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(sin(x^2)/2) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I15",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\operatorname{atan}{\\left(x \\right)} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "x*atan(x) - log(1+x^2)/2"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "I15",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\operatorname{atan}{\\left(x \\right)} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(x*atan(x) - log(1+x^2)/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I15",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\operatorname{atan}{\\left(x \\right)} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(x*atan(x) - log(1+x^2)/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I15",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\operatorname{atan}{\\left(x \\right)} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(x*atan(x) - log(1+x^2)/2) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I16",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int e^{\\sqrt{x}} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "2*(sqrt(x) - 1)*exp(sqrt(x))"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "I16",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int e^{\\sqrt{x}} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(2*(sqrt(x) - 1)*exp(sqrt(x)))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I16",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int e^{\\sqrt{x}} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(2*(sqrt(x) - 1)*exp(sqrt(x)))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I16",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int e^{\\sqrt{x}} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(2*(sqrt(x) - 1)*exp(sqrt(x))) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I17",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{e^{x} + 1} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "x - log(1+exp(x))"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "I17",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{e^{x} + 1} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(x - log(1+exp(x)))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I17",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{e^{x} + 1} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(x - log(1+exp(x)))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I17",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{e^{x} + 1} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(x - log(1+exp(x))) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I18",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int x^{3} e^{x^{2}} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "(x^2 - 1)*exp(x^2)/2"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "I18",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int x^{3} e^{x^{2}} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-((x^2 - 1)*exp(x^2)/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I18",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int x^{3} e^{x^{2}} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*((x^2 - 1)*exp(x^2)/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I18",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int x^{3} e^{x^{2}} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "((x^2 - 1)*exp(x^2)/2) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I19",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\tan{\\left(x \\right)} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "-log(abs(cos(x)))"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "I19",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\tan{\\left(x \\right)} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(-log(abs(cos(x))))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I19",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\tan{\\left(x \\right)} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(-log(abs(cos(x))))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I19",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\tan{\\left(x \\right)} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(-log(abs(cos(x)))) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I20",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{\\sqrt{x^{2} + 4}} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "log(x + sqrt(x^2+4))"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "I20",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{\\sqrt{x^{2} + 4}} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(log(x + sqrt(x^2+4)))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I20",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{\\sqrt{x^{2} + 4}} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(log(x + sqrt(x^2+4)))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I20",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{\\sqrt{x^{2} + 4}} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(log(x + sqrt(x^2+4))) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I21",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{3 x + 5}{x^{2} + 2 x + 5} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "3*log(x^2+2*x+5)/2 + atan((x+1)/2)"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "I21",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{3 x + 5}{x^{2} + 2 x + 5} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(3*log(x^2+2*x+5)/2 + atan((x+1)/2))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I21",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{3 x + 5}{x^{2} + 2 x + 5} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(3*log(x^2+2*x+5)/2 + atan((x+1)/2))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I21",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{3 x + 5}{x^{2} + 2 x + 5} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(3*log(x^2+2*x+5)/2 + atan((x+1)/2)) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I22",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int x^{2} \\log{\\left(x \\right)} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "x^3*log(x)/3 - x^3/9"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "I22",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int x^{2} \\log{\\left(x \\right)} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(x^3*log(x)/3 - x^3/9)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I22",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int x^{2} \\log{\\left(x \\right)} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(x^3*log(x)/3 - x^3/9)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I22",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int x^{2} \\log{\\left(x \\right)} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(x^3*log(x)/3 - x^3/9) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I23",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{x^{2} \\sqrt{x^{2} + 9}} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "-sqrt(x^2+9)/(9*x)"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "I23",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{x^{2} \\sqrt{x^{2} + 9}} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(-sqrt(x^2+9)/(9*x))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I23",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{x^{2} \\sqrt{x^{2} + 9}} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(-sqrt(x^2+9)/(9*x))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I23",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{1}{x^{2} \\sqrt{x^{2} + 9}} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(-sqrt(x^2+9)/(9*x)) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I24",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\cos^{4}{\\left(x \\right)} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "3*x/8 + sin(2*x)/4 + sin(4*x)/32"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "I24",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\cos^{4}{\\left(x \\right)} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(3*x/8 + sin(2*x)/4 + sin(4*x)/32)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I24",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\cos^{4}{\\left(x \\right)} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(3*x/8 + sin(2*x)/4 + sin(4*x)/32)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I24",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\cos^{4}{\\left(x \\right)} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(3*x/8 + sin(2*x)/4 + sin(4*x)/32) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I25",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{x^{2} + 1}{x^{3} - x} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "-log(abs(x)) + log(abs(x-1)) + log(abs(x+1))"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "I25",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{x^{2} + 1}{x^{3} - x} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(-log(abs(x)) + log(abs(x-1)) + log(abs(x+1)))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I25",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{x^{2} + 1}{x^{3} - x} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(-log(abs(x)) + log(abs(x-1)) + log(abs(x+1)))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "I25",
+    "tipo": "integral",
+    "enunciado": "Calcula la integral $\\int \\frac{x^{2} + 1}{x^{3} - x} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(-log(abs(x)) + log(abs(x-1)) + log(abs(x+1))) + x"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E01",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{\\pi} \\sin{\\left(x \\right)} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "2"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "E01",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{\\pi} \\sin{\\left(x \\right)} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E01",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{\\pi} \\sin{\\left(x \\right)} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E01",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{\\pi} \\sin{\\left(x \\right)} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(2) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E02",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{\\infty} x e^{- x} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "1"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "E02",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{\\infty} x e^{- x} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(1)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E02",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{\\infty} x e^{- x} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(1)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E02",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{\\infty} x e^{- x} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(1) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E03",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{-\\infty}^{\\infty} \\frac{1}{x^{2} + 1} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "pi"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "E03",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{-\\infty}^{\\infty} \\frac{1}{x^{2} + 1} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(pi)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E03",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{-\\infty}^{\\infty} \\frac{1}{x^{2} + 1} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(pi)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E03",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{-\\infty}^{\\infty} \\frac{1}{x^{2} + 1} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(pi) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E04",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{1} \\log{\\left(x \\right)} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "-1"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "E04",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{1} \\log{\\left(x \\right)} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(-1)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E04",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{1} \\log{\\left(x \\right)} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(-1)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E04",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{1} \\log{\\left(x \\right)} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(-1) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E05",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{-\\infty}^{\\infty} e^{- x^{2}} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "sqrt(pi)"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "E05",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{-\\infty}^{\\infty} e^{- x^{2}} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(sqrt(pi))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E05",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{-\\infty}^{\\infty} e^{- x^{2}} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(sqrt(pi))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E05",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{-\\infty}^{\\infty} e^{- x^{2}} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(sqrt(pi)) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E06",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{1} x^{2} \\sqrt{1 - x^{2}} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "pi/16"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "E06",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{1} x^{2} \\sqrt{1 - x^{2}} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(pi/16)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E06",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{1} x^{2} \\sqrt{1 - x^{2}} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(pi/16)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E06",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{1} x^{2} \\sqrt{1 - x^{2}} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(pi/16) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E07",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{1} \\frac{1}{\\sqrt{x}} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "2"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "E07",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{1} \\frac{1}{\\sqrt{x}} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E07",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{1} \\frac{1}{\\sqrt{x}} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E07",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{1} \\frac{1}{\\sqrt{x}} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(2) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E08",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{\\frac{\\pi}{2}} \\cos^{2}{\\left(x \\right)} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "pi/4"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "E08",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{\\frac{\\pi}{2}} \\cos^{2}{\\left(x \\right)} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(pi/4)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E08",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{\\frac{\\pi}{2}} \\cos^{2}{\\left(x \\right)} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(pi/4)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E08",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{\\frac{\\pi}{2}} \\cos^{2}{\\left(x \\right)} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(pi/4) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E09",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{\\pi} x \\sin{\\left(x \\right)} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "pi"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "E09",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{\\pi} x \\sin{\\left(x \\right)} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(pi)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E09",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{\\pi} x \\sin{\\left(x \\right)} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(pi)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E09",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{\\pi} x \\sin{\\left(x \\right)} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(pi) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E10",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{e}^{\\infty} \\frac{1}{x \\log{\\left(x \\right)}^{2}} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "1"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "E10",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{e}^{\\infty} \\frac{1}{x \\log{\\left(x \\right)}^{2}} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(1)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E10",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{e}^{\\infty} \\frac{1}{x \\log{\\left(x \\right)}^{2}} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(1)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E10",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{e}^{\\infty} \\frac{1}{x \\log{\\left(x \\right)}^{2}} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(1) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E11",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{2} \\sqrt{4 - x^{2}} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "pi"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "E11",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{2} \\sqrt{4 - x^{2}} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(pi)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E11",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{2} \\sqrt{4 - x^{2}} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(pi)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E11",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{2} \\sqrt{4 - x^{2}} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(pi) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E12",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{\\infty} x^{3} e^{- x} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "6"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "E12",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{\\infty} x^{3} e^{- x} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(6)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E12",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{\\infty} x^{3} e^{- x} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(6)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E12",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{0}^{\\infty} x^{3} e^{- x} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(6) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E13",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{1}^{e} x \\log{\\left(x \\right)} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "(E^2 + 1)/4"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "E13",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{1}^{e} x \\log{\\left(x \\right)} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-((E^2 + 1)/4)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E13",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{1}^{e} x \\log{\\left(x \\right)} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*((E^2 + 1)/4)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E13",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{1}^{e} x \\log{\\left(x \\right)} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "((E^2 + 1)/4) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E14",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{-1}^{\\infty} \\frac{1}{x^{2} + 2 x + 2} \\, dx$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "pi/2"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "E14",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{-1}^{\\infty} \\frac{1}{x^{2} + 2 x + 2} \\, dx$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(pi/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E14",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{-1}^{\\infty} \\frac{1}{x^{2} + 2 x + 2} \\, dx$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(pi/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "E14",
+    "tipo": "integral_definida",
+    "enunciado": "Calcula la integral $\\int_{-1}^{\\infty} \\frac{1}{x^{2} + 2 x + 2} \\, dx$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(pi/2) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L01",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{\\sin{\\left(x \\right)}}{x}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "1"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "L01",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{\\sin{\\left(x \\right)}}{x}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(1)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L01",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{\\sin{\\left(x \\right)}}{x}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(1)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L01",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{\\sin{\\left(x \\right)}}{x}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(1) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L02",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{1 - \\cos{\\left(x \\right)}}{x^{2}}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "1/2"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "L02",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{1 - \\cos{\\left(x \\right)}}{x^{2}}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(1/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L02",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{1 - \\cos{\\left(x \\right)}}{x^{2}}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(1/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L02",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{1 - \\cos{\\left(x \\right)}}{x^{2}}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(1/2) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L03",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} \\left(1 + \\frac{2}{x}\\right)^{x}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "E^2"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "L03",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} \\left(1 + \\frac{2}{x}\\right)^{x}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(E^2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L03",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} \\left(1 + \\frac{2}{x}\\right)^{x}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(E^2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L03",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} \\left(1 + \\frac{2}{x}\\right)^{x}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(E^2) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L04",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{- x + e^{x} - 1}{x^{2}}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "1/2"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "L04",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{- x + e^{x} - 1}{x^{2}}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(1/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L04",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{- x + e^{x} - 1}{x^{2}}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(1/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L04",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{- x + e^{x} - 1}{x^{2}}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(1/2) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L05",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{- x + \\tan{\\left(x \\right)}}{x^{3}}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "1/3"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "L05",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{- x + \\tan{\\left(x \\right)}}{x^{3}}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(1/3)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L05",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{- x + \\tan{\\left(x \\right)}}{x^{3}}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(1/3)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L05",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{- x + \\tan{\\left(x \\right)}}{x^{3}}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(1/3) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L06",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{x - \\sin{\\left(x \\right)}}{x^{3}}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "1/6"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "L06",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{x - \\sin{\\left(x \\right)}}{x^{3}}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(1/6)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L06",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{x - \\sin{\\left(x \\right)}}{x^{3}}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(1/6)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L06",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{x - \\sin{\\left(x \\right)}}{x^{3}}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(1/6) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L07",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} - x + \\sqrt{x^{2} + x}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "1/2"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "L07",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} - x + \\sqrt{x^{2} + x}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(1/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L07",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} - x + \\sqrt{x^{2} + x}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(1/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L07",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} - x + \\sqrt{x^{2} + x}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(1/2) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L08",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} \\frac{3 x^{2} + 2}{5 x^{2} - x}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "3/5"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "L08",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} \\frac{3 x^{2} + 2}{5 x^{2} - x}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(3/5)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L08",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} \\frac{3 x^{2} + 2}{5 x^{2} - x}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(3/5)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L08",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} \\frac{3 x^{2} + 2}{5 x^{2} - x}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(3/5) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L09",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} x^{\\frac{1}{x}}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "1"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "L09",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} x^{\\frac{1}{x}}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(1)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L09",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} x^{\\frac{1}{x}}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(1)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L09",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} x^{\\frac{1}{x}}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(1) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L10",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\left(\\sin{\\left(x \\right)} + 1\\right)^{\\frac{1}{x}}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "E"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "L10",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\left(\\sin{\\left(x \\right)} + 1\\right)^{\\frac{1}{x}}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(E)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L10",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\left(\\sin{\\left(x \\right)} + 1\\right)^{\\frac{1}{x}}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(E)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L10",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\left(\\sin{\\left(x \\right)} + 1\\right)^{\\frac{1}{x}}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(E) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L11",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{- x + \\log{\\left(x + 1 \\right)}}{x^{2}}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "-1/2"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "L11",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{- x + \\log{\\left(x + 1 \\right)}}{x^{2}}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(-1/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L11",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{- x + \\log{\\left(x + 1 \\right)}}{x^{2}}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(-1/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L11",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{- x + \\log{\\left(x + 1 \\right)}}{x^{2}}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(-1/2) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L12",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{2^{x} - 1}{x}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "log(2)"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "L12",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{2^{x} - 1}{x}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(log(2))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L12",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{2^{x} - 1}{x}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(log(2))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L12",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{2^{x} - 1}{x}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(log(2)) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L13",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\cos^{\\frac{1}{x^{2}}}{\\left(x \\right)}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "exp(-1/2)"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "L13",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\cos^{\\frac{1}{x^{2}}}{\\left(x \\right)}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(exp(-1/2))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L13",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\cos^{\\frac{1}{x^{2}}}{\\left(x \\right)}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(exp(-1/2))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L13",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\cos^{\\frac{1}{x^{2}}}{\\left(x \\right)}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(exp(-1/2)) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L14",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{\\sqrt{x + 1} - 1}{x}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "1/2"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "L14",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{\\sqrt{x + 1} - 1}{x}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(1/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L14",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{\\sqrt{x + 1} - 1}{x}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(1/2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L14",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{\\sqrt{x + 1} - 1}{x}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(1/2) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L15",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{- 2 x + e^{x} - e^{- x}}{x - \\sin{\\left(x \\right)}}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "2"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "L15",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{- 2 x + e^{x} - e^{- x}}{x - \\sin{\\left(x \\right)}}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L15",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{- 2 x + e^{x} - e^{- x}}{x - \\sin{\\left(x \\right)}}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(2)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L15",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{- 2 x + e^{x} - e^{- x}}{x - \\sin{\\left(x \\right)}}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(2) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L16",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} - \\frac{1}{\\sin{\\left(x \\right)}} + \\frac{1}{x}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "0"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "L16",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} - \\frac{1}{\\sin{\\left(x \\right)}} + \\frac{1}{x}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(0) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L17",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} x^{2} e^{- x}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "0"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "L17",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} x^{2} e^{- x}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(0) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L18",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{\\frac{x^{2}}{2} + \\cos{\\left(x \\right)} - 1}{x^{4}}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "1/24"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "L18",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{\\frac{x^{2}}{2} + \\cos{\\left(x \\right)} - 1}{x^{4}}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(1/24)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L18",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{\\frac{x^{2}}{2} + \\cos{\\left(x \\right)} - 1}{x^{4}}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(1/24)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L18",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to 0} \\frac{\\frac{x^{2}}{2} + \\cos{\\left(x \\right)} - 1}{x^{4}}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(1/24) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L19",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} x \\sin{\\left(\\frac{1}{x} \\right)}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "1"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "L19",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} x \\sin{\\left(\\frac{1}{x} \\right)}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(1)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L19",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} x \\sin{\\left(\\frac{1}{x} \\right)}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(1)"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L19",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} x \\sin{\\left(\\frac{1}{x} \\right)}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(1) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L20",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} \\left(\\frac{x}{x + 1}\\right)^{x}$.",
+    "mutacion": "correcta",
+    "bloque": {
+      "resultado": "exp(-1)"
+    },
+    "correcta": true,
+    "sello": "verificado"
+  },
+  {
+    "id": "L20",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} \\left(\\frac{x}{x + 1}\\right)^{x}$.",
+    "mutacion": "signo cambiado",
+    "bloque": {
+      "resultado": "-(exp(-1))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L20",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} \\left(\\frac{x}{x + 1}\\right)^{x}$.",
+    "mutacion": "factor 2",
+    "bloque": {
+      "resultado": "2*(exp(-1))"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  },
+  {
+    "id": "L20",
+    "tipo": "limite",
+    "enunciado": "Calcula el límite $\\lim_{x \\to \\infty} \\left(\\frac{x}{x + 1}\\right)^{x}$.",
+    "mutacion": "término de más",
+    "bloque": {
+      "resultado": "(exp(-1)) + 1"
+    },
+    "correcta": false,
+    "sello": "discrepancia"
+  }
+]

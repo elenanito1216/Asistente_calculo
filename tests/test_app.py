@@ -102,6 +102,7 @@ def test_system_prompt_pedagogical_structure():
     ("La derivada de $x^2$ es $2x$.", 200),
     (genai_errors.APIError(429, httpx.Response(429, json={"error": {"message": "RESOURCE_EXHAUSTED"}})), 429),
     (genai_errors.APIError(400, httpx.Response(400, json={"error": {"message": "INVALID_ARGUMENT"}})), 500),
+    (genai_errors.APIError(503, httpx.Response(503, json={"error": {"message": "UNAVAILABLE"}})), 503),
     (asyncio.TimeoutError(), 504),
 ])
 def test_chat_con_gemini_simulado(monkeypatch, resultado, codigo_esperado):
@@ -136,3 +137,81 @@ def test_chat_seguimiento_con_respuesta_larga_del_tutor(monkeypatch):
         {"rol": "usuario", "contenido": "Explícame con más detalle el paso 2"},
     ]})
     assert response.status_code == 200
+
+
+def test_chat_devuelve_verificacion_sympy(monkeypatch):
+    """El bloque ```verificacion``` se quita del texto y se devuelve el resultado de SymPy."""
+    async def generate_content(**kwargs):
+        return SimpleNamespace(text=(
+            "La integral es $x e^x - e^x + C$.\n\n```verificacion\n"
+            '{"tipo": "integral", "expresion": "x*exp(x)", "variable": "x", "resultado": "x*exp(x) - exp(x)"}\n```'
+        ))
+
+    cliente_falso = SimpleNamespace(aio=SimpleNamespace(models=SimpleNamespace(generate_content=generate_content)))
+    monkeypatch.setattr(app_module, "GEMINI_API_KEY", "clave_falsa")
+    monkeypatch.setattr(app_module, "gemini_client", cliente_falso)
+
+    response = client.post("/api/chat", json={"mensajes": [{"rol": "usuario", "contenido": "Integra x e^x"}]})
+    assert response.status_code == 200
+    data = response.json()
+    assert "```verificacion" not in data["respuesta"]
+    assert data["verificacion"] == {"estado": "verificado", "sympy": None}
+
+
+def test_chat_devuelve_grafica(monkeypatch):
+    """El bloque ```grafica``` se quita del texto y se devuelven los puntos calculados."""
+    async def generate_content(**kwargs):
+        return SimpleNamespace(text='Mira la curva.\n\n```grafica\n{"tipo": "2d", "funciones": ["sin(x)"], "x": [0, 3]}\n```')
+
+    cliente_falso = SimpleNamespace(aio=SimpleNamespace(models=SimpleNamespace(generate_content=generate_content)))
+    monkeypatch.setattr(app_module, "GEMINI_API_KEY", "clave_falsa")
+    monkeypatch.setattr(app_module, "gemini_client", cliente_falso)
+
+    data = client.post("/api/chat", json={"mensajes": [{"rol": "usuario", "contenido": "Grafica sin(x)"}]}).json()
+    assert data["respuesta"] == "Mira la curva."
+    assert data["grafica"]["tipo"] == "2d"
+    assert len(data["grafica"]["trazos"][0]["x"]) == 300
+
+
+def test_chat_usa_modelo_de_respaldo_si_el_principal_esta_saturado(monkeypatch):
+    """Si el modelo principal responde 503, se reintenta con el siguiente de GEMINI_MODELOS_RESPALDO."""
+    usados = []
+
+    async def generate_content(model, **kwargs):
+        usados.append(model)
+        if model == "principal":
+            raise genai_errors.APIError(503, httpx.Response(503, json={"error": {"message": "UNAVAILABLE"}}))
+        return SimpleNamespace(text="Respuesta del respaldo.")
+
+    cliente_falso = SimpleNamespace(aio=SimpleNamespace(models=SimpleNamespace(generate_content=generate_content)))
+    monkeypatch.setattr(app_module, "GEMINI_API_KEY", "clave_falsa")
+    monkeypatch.setattr(app_module, "GEMINI_MODEL", "principal")
+    monkeypatch.setenv("GEMINI_MODELOS_RESPALDO", "respaldo1,respaldo2")
+    monkeypatch.setattr(app_module, "gemini_client", cliente_falso)
+
+    response = client.post("/api/chat", json={"mensajes": [{"rol": "usuario", "contenido": "Deriva x^2"}]})
+    assert response.status_code == 200
+    assert response.json()["respuesta"] == "Respuesta del respaldo."
+    assert usados == ["principal", "respaldo1"]
+
+
+def test_chat_devuelve_narracion_validada(monkeypatch):
+    """El bloque ```narracion``` se quita del texto; los focos que no son texto se descartan."""
+    async def generate_content(**kwargs):
+        return SimpleNamespace(text=(
+            'Solución.\n\n```narracion\n{"pasos": ['
+            '{"texto": "Mira la gráfica.", "foco": "grafica"}, {"texto": "Aplicamos la regla.", "foco": "\\\\frac{d}{dx}"}, '
+            '{"texto": "Listo.", "foco": 3}, {"texto": "   "}]}\n```'
+        ))
+
+    cliente_falso = SimpleNamespace(aio=SimpleNamespace(models=SimpleNamespace(generate_content=generate_content)))
+    monkeypatch.setattr(app_module, "GEMINI_API_KEY", "clave_falsa")
+    monkeypatch.setattr(app_module, "gemini_client", cliente_falso)
+
+    data = client.post("/api/chat", json={"mensajes": [{"rol": "usuario", "contenido": "Deriva x^2"}]}).json()
+    assert data["respuesta"] == "Solución."
+    assert data["narracion"] == {"pasos": [
+        {"texto": "Mira la gráfica.", "foco": "grafica"},
+        {"texto": "Aplicamos la regla.", "foco": "\\frac{d}{dx}"},
+        {"texto": "Listo.", "foco": None},
+    ]}

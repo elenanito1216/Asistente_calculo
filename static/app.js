@@ -233,6 +233,7 @@ function separarContenido(texto) {
 
 /** Limpia los 3 paneles a su estado inicial */
 function limpiarPaneles() {
+  detenerNarracion();
   chatMessages.innerHTML = '';
   pizarraWelcome.style.display = '';
   pizarraContent.classList.add('hidden');
@@ -250,18 +251,208 @@ function crearPlaceholder() {
   return div;
 }
 
-/** Muestra los bloques math en la pizarra central */
-function mostrarEnPizarra(mathBlocks, titulo) {
+/**
+ * Sello con el resultado de la comprobación simbólica hecha por SymPy en el backend.
+ * verificacion: { estado: 'verificado' | 'discrepancia' | 'no_verificable', sympy: latex | null }
+ */
+function selloVerificacion(verificacion) {
+  if (!verificacion) return '';
+  const textos = {
+    verificado: '✅ Resultado verificado con SymPy',
+    discrepancia: '⚠️ SymPy obtuvo un resultado distinto',
+    no_verificable: '❔ SymPy no pudo verificar este resultado'
+  };
+  const texto = textos[verificacion.estado];
+  if (!texto) return '';
+  const valor = verificacion.sympy ? `: $${escaparHTML(verificacion.sympy)}$` : '';
+  return `<div class="verif-sello verif-${verificacion.estado}">${texto}${valor}</div>`;
+}
+
+// Colores de las series (paleta categórica, variante para fondo oscuro), en orden fijo
+const COLORES_SERIES = ['#3987e5', '#d95926', '#199e70', '#c98500'];
+const COLOR_TANGENTE = '#9085e9';
+const ESTILO_EJES = { gridcolor: '#222222', zerolinecolor: '#383838', linecolor: '#383838', color: '#a0a0a0' };
+
+/**
+ * Dibuja con Plotly una gráfica cuyos puntos ya calculó SymPy en el backend (graficador.py).
+ * grafica 2D: { tipo: '2d', trazos: [{ estilo: 'curva'|'area'|'tangente'|'punto', nombre, x, y }], rango_y }
+ * grafica 3D: { tipo: '3d', nombre, x, y, z, plano?: { nombre, z }, punto?: { x, y, z } }
+ */
+function dibujarGrafica(contenedor, grafica) {
+  if (typeof Plotly === 'undefined') return;  // CDN no disponible: la pizarra sigue funcionando sin gráfica
+
+  const layout = {
+    paper_bgcolor: '#141414', plot_bgcolor: '#141414',
+    font: { family: 'Inter, sans-serif', color: '#a0a0a0', size: 12 },
+    margin: { l: 48, r: 16, t: 16, b: 40 },
+    legend: { orientation: 'h', y: -0.15, font: { color: '#ffffff' } },
+    hoverlabel: { bgcolor: '#1c1c1c', bordercolor: '#383838', font: { color: '#ffffff' } }
+  };
+  let trazos;
+
+  if (grafica.tipo === '3d') {
+    trazos = [{
+      type: 'surface', name: grafica.nombre, x: grafica.x, y: grafica.y, z: grafica.z,
+      // Escala secuencial de un solo tono (azul), de oscuro a claro según la altura
+      colorscale: [[0, '#0d2a52'], [1, '#86b6ef']], showscale: false, opacity: 0.95,
+      hovertemplate: 'x = %{x:.3f}<br>y = %{y:.3f}<br>z = %{z:.3f}<extra></extra>'
+    }];
+    if (grafica.plano) {
+      trazos.push({
+        type: 'surface', name: grafica.plano.nombre, x: grafica.x, y: grafica.y, z: grafica.plano.z,
+        colorscale: [[0, COLOR_TANGENTE], [1, COLOR_TANGENTE]], showscale: false, opacity: 0.55,
+        hovertemplate: `${escaparHTML(grafica.plano.nombre)}<br>z = %{z:.3f}<extra></extra>`
+      });
+    }
+    if (grafica.punto) {
+      trazos.push({
+        type: 'scatter3d', mode: 'markers', name: 'Punto de tangencia',
+        x: [grafica.punto.x], y: [grafica.punto.y], z: [grafica.punto.z],
+        marker: { size: 6, color: '#ffffff', line: { color: '#141414', width: 2 } }
+      });
+    }
+    layout.scene = {
+      bgcolor: '#141414',
+      aspectmode: 'cube',                         // Ejes de igual tamaño: la forma no se deforma
+      camera: { eye: { x: 1.6, y: -1.6, z: 1.1 } }, // Vista en diagonal desde arriba
+      xaxis: { ...ESTILO_EJES, title: 'x' }, yaxis: { ...ESTILO_EJES, title: 'y' }, zaxis: { ...ESTILO_EJES, title: 'z' }
+    };
+    layout.margin = { l: 0, r: 0, t: 0, b: 0 };
+  } else {
+    let serie = 0;
+    trazos = grafica.trazos.map(t => {
+      const base = { type: 'scatter', name: t.nombre, x: t.x, y: t.y, connectgaps: false };
+      if (t.estilo === 'area') {
+        return { ...base, mode: 'lines', fill: 'tozeroy', line: { color: COLORES_SERIES[0], width: 0 },
+                 fillcolor: 'rgba(57, 135, 229, 0.3)' };
+      }
+      if (t.estilo === 'tangente') {
+        return { ...base, mode: 'lines', line: { color: COLOR_TANGENTE, width: 2, dash: 'dash' } };
+      }
+      if (t.estilo === 'punto') {
+        return { ...base, mode: 'markers', marker: { size: 10, color: '#ffffff', line: { color: '#141414', width: 2 } } };
+      }
+      return { ...base, mode: 'lines', line: { color: COLORES_SERIES[serie++ % COLORES_SERIES.length], width: 2 } };
+    });
+    layout.xaxis = { ...ESTILO_EJES };
+    layout.yaxis = { ...ESTILO_EJES, ...(grafica.rango_y ? { range: grafica.rango_y } : {}) };
+    layout.hovermode = 'x unified';
+    layout.showlegend = trazos.length > 1;
+  }
+
+  Plotly.newPlot(contenedor, trazos, layout, { responsive: true, displaylogo: false });
+}
+
+// ============================================================================
+// NARRACIÓN POR VOZ (Web Speech API del navegador, sin librerías)
+// ============================================================================
+
+const vozDisponible = 'speechSynthesis' in window;
+let narracionId = 0;  // Invalida los eventos de una narración anterior al detenerla o reiniciarla
+
+function vozEspanol() {
+  const voces = speechSynthesis.getVoices();
+  return voces.find(v => v.lang === 'es-MX') || voces.find(v => v.lang.startsWith('es')) || null;
+}
+
+function quitarEnfoque() {
+  document.querySelectorAll('.enfocado').forEach(el => el.classList.remove('enfocado'));
+}
+
+function detenerNarracion() {
+  narracionId++;
+  if (vozDisponible) speechSynthesis.cancel();
+  quitarEnfoque();
+  const boton = document.getElementById('btnNarrar');
+  if (boton) {
+    boton.textContent = '🔊 Escuchar explicación';
+    boton.dataset.narrando = '';
+  }
+  document.getElementById('narracionSubtitulo')?.classList.add('hidden');
+}
+
+/** Lee los pasos uno por uno, resaltando en la pizarra la gráfica o fórmula de cada paso */
+function narrar(pasos) {
+  detenerNarracion();
+  const id = narracionId;
+  const boton = document.getElementById('btnNarrar');
+  const subtitulo = document.getElementById('narracionSubtitulo');
+  boton.textContent = '⏹ Detener';
+  boton.dataset.narrando = '1';
+  subtitulo.classList.remove('hidden');
+
+  const voz = vozEspanol();
+  const grafica = pizarraMath.querySelector('.grafica-block');
+  // El foco es el LaTeX de una fórmula, a veces resumido por la IA (ej. omite pasos intermedios).
+  // Se compara sin espacios ni '&': comienzo exacto, luego contenido, luego el prefijo común más largo.
+  const normalizar = (t) => t.replace(/\\[,;!: ]|[\s&]/g, '');
+  const formulas = [...pizarraMath.querySelectorAll('.math-block')].map(el => ({ el, latex: normalizar(el.dataset.latex || '') }));
+  const prefijoComun = (a, b) => { let i = 0; while (i < a.length && a[i] === b[i]) i++; return i; };
+  const buscarFormula = (foco) => {
+    const f = normalizar(foco);
+    if (!f) return null;
+    const exacta = formulas.find(x => x.latex.startsWith(f)) || formulas.find(x => x.latex.includes(f));
+    if (exacta) return exacta.el;
+    let mejor = null, largo = 3;  // Mínimo 4 caracteres en común para no resaltar algo al azar
+    formulas.forEach(x => { const n = prefijoComun(f, x.latex); if (n > largo) { mejor = x; largo = n; } });
+    return mejor?.el || null;
+  };
+
+  pasos.forEach((paso, i) => {
+    // Una frase por paso: Chrome corta las locuciones muy largas
+    const locucion = new SpeechSynthesisUtterance(paso.texto);
+    locucion.lang = voz ? voz.lang : 'es-ES';
+    if (voz) locucion.voice = voz;
+    locucion.onstart = () => {
+      if (id !== narracionId) return;
+      quitarEnfoque();
+      const elemento = paso.foco === 'grafica' ? grafica : (paso.foco ? buscarFormula(paso.foco) : null);
+      if (elemento) {
+        elemento.classList.add('enfocado');
+        elemento.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      subtitulo.textContent = paso.texto;  // Subtítulo: también sirve a quien no puede escuchar
+    };
+    if (i === pasos.length - 1) {
+      locucion.onend = () => { if (id === narracionId) detenerNarracion(); };
+    }
+    speechSynthesis.speak(locucion);
+  });
+}
+
+/**
+ * Muestra la respuesta en la pizarra central: gráfica (si hay) y bloques math.
+ * extras: { verificacion, grafica, narracion } tal como los devolvió /api/chat
+ */
+function mostrarEnPizarra(mathBlocks, titulo, extras = {}) {
   pizarraWelcome.style.display = 'none';
   pizarraContent.classList.remove('hidden');
+  detenerNarracion();
 
   // Header
-  pizarraHeader.innerHTML = `<h2>${escaparHTML(titulo)}</h2>`;
+  const controlesVoz = extras.narracion && vozDisponible
+    ? `<button id="btnNarrar" class="btn-narrar" type="button">🔊 Escuchar explicación</button>
+       <div id="narracionSubtitulo" class="narracion-subtitulo hidden" aria-live="polite"></div>`
+    : '';
+  pizarraHeader.innerHTML = `<h2>${escaparHTML(titulo)}</h2>${selloVerificacion(extras.verificacion)}${controlesVoz}`;
+  ejecutarKaTeX(pizarraHeader);
+  document.getElementById('btnNarrar')?.addEventListener('click', (e) => {
+    if (e.currentTarget.dataset.narrando) detenerNarracion();
+    else narrar(extras.narracion.pasos);
+  });
 
   // Limpiar y pintar bloques
   pizarraMath.innerHTML = '';
 
+  if (extras.grafica) {
+    const bloque = document.createElement('div');
+    bloque.className = 'grafica-block';
+    pizarraMath.appendChild(bloque);  // Plotly necesita el contenedor ya en el DOM para medirlo
+    dibujarGrafica(bloque, extras.grafica);
+  }
+
   if (mathBlocks.length === 0) {
+    if (extras.grafica) return;
     const noMath = document.createElement('div');
     noMath.className = 'math-inline-block';
     noMath.innerHTML = '<p style="text-align:center; color: var(--text-muted);">No se detectaron fórmulas display en esta respuesta.</p>';
@@ -272,6 +463,7 @@ function mostrarEnPizarra(mathBlocks, titulo) {
   mathBlocks.forEach(latex => {
     const block = document.createElement('div');
     block.className = 'math-block';
+    block.dataset.latex = latex;  // Para que la narración encuentre esta fórmula
     block.innerHTML = `$$${latex}$$`;
     pizarraMath.appendChild(block);
     ejecutarKaTeX(block);
@@ -329,6 +521,7 @@ function agregarMensajeChat(rol, contenido, opts = {}) {
     const htmlRenderizado = renderizarMarkdownConMath(contenido);
     bodyHTML = `<div class="chat-msg-body" data-raw="${encodeURIComponent(contenido)}">
       ${htmlRenderizado}
+      ${selloVerificacion(opts.verificacion)}
       <button class="msg-copy-btn" title="Copiar respuesta">📋 Copiar</button>
     </div>`;
   }
@@ -350,7 +543,7 @@ function agregarMensajeChat(rol, contenido, opts = {}) {
       if (e.target.closest('.msg-copy-btn')) return; // No al click en copiar
       const raw = decodeURIComponent(body.dataset.raw);
       const { mathBlocks } = separarContenido(raw);
-      mostrarEnPizarra(mathBlocks, 'Respuesta Seleccionada');
+      mostrarEnPizarra(mathBlocks, 'Respuesta Seleccionada', opts);
       mostrarTextoExplicativo(raw);
       ultimoTextoTutor = raw;
     });
@@ -427,18 +620,18 @@ function restaurarConversacion(id) {
   let ultimaRespuestaTutor = null;
 
   conv.mensajes.forEach(msg => {
-    agregarMensajeChat(msg.rol, msg.contenido);
+    agregarMensajeChat(msg.rol, msg.contenido, { verificacion: msg.verificacion, grafica: msg.grafica, narracion: msg.narracion });
     if (msg.rol === 'tutor') {
-      ultimaRespuestaTutor = msg.contenido;
+      ultimaRespuestaTutor = msg;
     }
   });
 
   // Mostrar la última respuesta del tutor en la pizarra y texto
   if (ultimaRespuestaTutor) {
-    const { mathBlocks } = separarContenido(ultimaRespuestaTutor);
-    mostrarEnPizarra(mathBlocks, conv.titulo);
-    mostrarTextoExplicativo(ultimaRespuestaTutor);
-    ultimoTextoTutor = ultimaRespuestaTutor;
+    const { mathBlocks } = separarContenido(ultimaRespuestaTutor.contenido);
+    mostrarEnPizarra(mathBlocks, conv.titulo, ultimaRespuestaTutor);
+    mostrarTextoExplicativo(ultimaRespuestaTutor.contenido);
+    ultimoTextoTutor = ultimaRespuestaTutor.contenido;
   } else {
     limpiarPaneles();
     // Re-pintar mensajes si los hay
@@ -504,19 +697,19 @@ async function enviarMensaje(textoMensaje) {
       conv.mensajes.pop(); // Quitar el mensaje fallido
       guardarEstado();
     } else {
-      const respuesta = data.respuesta;
+      const { respuesta, verificacion, grafica, narracion } = data;
 
-      // Guardar respuesta del tutor
-      conv.mensajes.push({ rol: 'tutor', contenido: respuesta });
+      // Guardar respuesta del tutor (el backend ignora verificacion, grafica y narracion en el historial)
+      conv.mensajes.push({ rol: 'tutor', contenido: respuesta, verificacion, grafica, narracion });
       conv.fecha = new Date().toISOString();
       guardarEstado();
 
       // Mostrar en chat
-      agregarMensajeChat('tutor', respuesta);
+      agregarMensajeChat('tutor', respuesta, { verificacion, grafica, narracion });
 
       // Separar math y mostrar en pizarra + panel de texto
       const { mathBlocks } = separarContenido(respuesta);
-      mostrarEnPizarra(mathBlocks, conv.titulo);
+      mostrarEnPizarra(mathBlocks, conv.titulo, { verificacion, grafica, narracion });
       mostrarTextoExplicativo(respuesta);
       ultimoTextoTutor = respuesta;
     }
